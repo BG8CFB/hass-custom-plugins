@@ -17,8 +17,15 @@ Home Assistant 定制插件仓库（FNOS NAS 生产自用 + 上游 PR 备用份�
 
 ## deebot-client-xwk78e/
 
-来源：deebot-client 上游被拒的 PR #1802（AI 生成不符仓库结构），生产自用补丁。
+DEEBOT T80 水箱版（xwk78e）支持补丁，全量文件 + 重放脚本。
 
-- DEEBOT T80 水箱版（xwk78e）硬件 profile + commands/events
-- 上游规范方案是 PR #1840（symlink 到 9eamof family），合并后升级 deebot-client 18.6.0+ 可弃用本补丁
-- 部署位置：容器内 `deebot_client/hardware/xwk78e.py`、`commands/json/xwk78e.py`、`events/xwk78e.py`
+来源：deebot-client 上游被拒的 PR #1802（maintainer 认为 AI 生成不符仓库结构，但代码正确），已适配 deebot-client 18.5.1。
+
+**目录结构即容器内目标路径**（`deebot_client/` 下）：
+- `hardware/xwk78e.py` — 硬件 profile（能力声明）
+- `commands/json/xwk78e.py` — T80 专属命令集
+- `events/xwk78e.py` — T80 事件（洗布/集尘等）
+- `messages/json/xwk78e.py` + `messages/__init__.py` — 消息适配
+- `reapply_patch_deebot.py` — HA 升级后一键重放补丁（含用法/回滚说明）
+
+上游规范方案是 PR #1840（symlink 到 9eamof family），合并后升级 deebot-client 18.6.0+ 可弃用本补丁。
